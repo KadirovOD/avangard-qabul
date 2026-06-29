@@ -1,0 +1,9 @@
+{
+  "name": "avangard-qabul",
+  "version": "1.0.0",
+  "description": "Avangard School qabul forma — amoCRM ga lid yo'naltiradi",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}

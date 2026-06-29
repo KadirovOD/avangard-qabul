@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0b3da8">
+<title>Qabul boshlandi — Avangard School</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --brand: #0b3da8;
+    --brand-2: #1e57d6;
+    --brand-3: #2f7bff;
+    --ink: #0a1c3e;
+    --muted: #6b7a99;
+    --line: #e3e8f5;
+    --bg: #f4f7fe;
+    --white: #ffffff;
+    --green: #10b981;
+    --red: #ef4444;
+    --shadow: 0 10px 40px rgba(11, 61, 168, 0.18);
+    --shadow-sm: 0 2px 12px rgba(11, 61, 168, 0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body {
+    background:
+      radial-gradient(1200px 600px at 20% -10%, #2f7bff 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #1e57d6 0%, transparent 55%),
+      linear-gradient(180deg, #0b3da8 0%, #0a2c75 50%, #07215a 100%);
+    background-attachment: fixed;
+  }
+
+  .wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+    position: relative;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    color: white;
+    text-align: center;
+    padding: 6px 6px 26px;
+  }
+  .hero-logo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 16px;
+    display: block;
+    filter: drop-shadow(0 6px 24px rgba(0,0,0,0.25));
+    background: transparent;
+    mix-blend-mode: screen;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.2px;
+  }
+  .pill.star::before { content: '⭐'; font-size: 12px; }
+  .pill.lang::before { content: '🇺🇿 🇷🇺'; font-size: 12px; letter-spacing: -2px; }
+
+  .hero h1 {
+    font-size: 44px;
+    line-height: 1.02;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(180deg, #ffffff 0%, #cfe1ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.5;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: 22px;
+    padding: 24px 22px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .card-head .ic {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .card-head .ttl { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .card-head .sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  /* ── FIELDS ── */
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 7px;
+    letter-spacing: -0.1px;
+  }
+  .field label .req { color: var(--red); margin-left: 2px; }
+
+  .input, .select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: #f8faff;
+    transition: all 0.18s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .input::placeholder { color: #9aa6c2; }
+  .input:focus, .select:focus {
+    outline: none;
+    border-color: var(--brand-2);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(30, 87, 214, 0.12);
+  }
+  .input.err, .select.err {
+    border-color: var(--red);
+    background: #fff5f5;
+  }
+
+  .select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23365a96' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+  }
+
+  .phone-wrap { position: relative; }
+  .phone-wrap .prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    pointer-events: none;
+  }
+  .phone-wrap .input { padding-left: 56px; }
+
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .err-msg {
+    font-size: 12.5px;
+    color: var(--red);
+    margin-top: 6px;
+    display: none;
+    font-weight: 500;
+  }
+  .field.show-err .err-msg { display: block; }
+
+  /* ── SUBMIT ── */
+  .submit-btn {
+    width: 100%;
+    margin-top: 6px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(11, 61, 168, 0.35);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .submit-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(11, 61, 168, 0.45); }
+  .submit-btn:active:not(:disabled) { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+  .submit-btn .spin {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  .submit-btn.loading .label { display: none; }
+  .submit-btn.loading .spin { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── SECURITY NOTE ── */
+  .privacy {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.45;
+  }
+  .privacy::before { content: '🔒 '; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 22px;
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  .footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 1px;
+  }
+  .footer-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .footer-row a { display: inline-flex; align-items: center; gap: 5px; }
+
+  /* ── SUCCESS ── */
+  .success {
+    display: none;
+    text-align: center;
+    padding: 12px 4px 4px;
+  }
+  .success.show { display: block; animation: fadeUp 0.5s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .success-ic {
+    width: 78px;
+    height: 78px;
+    margin: 6px auto 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    box-shadow: 0 10px 28px rgba(16, 185, 129, 0.35);
+    animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+  .success h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+  .success p { color: var(--muted); font-size: 14.5px; line-height: 1.55; margin-bottom: 22px; }
+  .success .summary {
+    background: #f4f7fe;
+    border-radius: 14px;
+    padding: 14px 16px;
+    text-align: left;
+    margin-bottom: 22px;
+  }
+  .success .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13.5px;
+  }
+  .success .row + .row { border-top: 1px dashed var(--line); }
+  .success .row span:first-child { color: var(--muted); }
+  .success .row span:last-child { color: var(--ink); font-weight: 600; }
+  .success .again {
+    background: none;
+    border: 1.5px solid var(--line);
+    color: var(--brand);
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .success .again:hover { background: var(--brand); color: white; border-color: var(--brand); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 420px) {
+    .wrap { padding: 22px 14px 50px; }
+    .hero { padding: 4px 4px 22px; }
+    .hero-logo { width: 80px; height: 80px; }
+    .hero h1 { font-size: 36px; letter-spacing: -1.2px; }
+    .hero p { font-size: 14px; }
+    .card { padding: 22px 18px; border-radius: 20px; }
+    .input, .select { font-size: 16px; } /* prevents iOS auto-zoom */
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="logo.png" alt="Avangard School" class="hero-logo">
+    <div class="hero-pills">
+      <span class="pill star">0–11 sinflarga</span>
+      <span class="pill lang">Uzb / Rus sinflarga</span>
+    </div>
+    <h1><span class="accent">Qabul boshlandi</span></h1>
+    <p>Anketani to'ldiring — mutaxassisimiz siz bilan tez orada bog'lanadi va savollaringizga javob beradi.</p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card" id="formCard">
+    <div class="card-head">
+      <div class="ic">📝</div>
+      <div>
+        <div class="ttl">Qabul anketasi</div>
+        <div class="sub">Ma'lumotlar maxfiy saqlanadi</div>
+      </div>
+    </div>
+
+    <form id="leadForm" novalidate>
+      <!-- ISM -->
+      <div class="field" id="f-name">
+        <label>Ota-ona ismi <span class="req">*</span></label>
+        <input class="input" type="text" id="name" name="name" placeholder="F.I.O. to'liq kiriting" autocomplete="name" required>
+        <div class="err-msg">Iltimos, ismingizni kiriting</div>
+      </div>
+
+      <!-- NOMER -->
+      <div class="field" id="f-phone">
+        <label>Telefon raqam <span class="req">*</span></label>
+        <div class="phone-wrap">
+          <span class="prefix">+998</span>
+          <input class="input" type="tel" id="phone" name="phone" placeholder="90 123 45 67" autocomplete="tel-national" inputmode="numeric" maxlength="12" required>
+        </div>
+        <div class="err-msg">Telefon raqamni to'liq kiriting (9 ta raqam)</div>
+      </div>
+
+      <!-- MANZIL -->
+      <div class="field" id="f-address">
+        <label>Manzil <span class="req">*</span></label>
+        <input class="input" type="text" id="address" name="address" placeholder="Farg'ona shahar, ko'cha, uy..." autocomplete="street-address" required>
+        <div class="err-msg">Iltimos, manzilingizni kiriting</div>
+      </div>
+
+      <!-- SINF -->
+      <div class="field" id="f-grade">
+        <label>Farzandning sinfi <span class="req">*</span></label>
+        <select class="select" id="grade" name="grade" required>
+          <option value="">Sinfni tanlang</option>
+          <option value="0">0-sinf (Maktabgacha)</option>
+          <option value="1">1-sinf</option>
+          <option value="2">2-sinf</option>
+          <option value="3">3-sinf</option>
+          <option value="4">4-sinf</option>
+          <option value="5">5-sinf</option>
+          <option value="6">6-sinf</option>
+          <option value="7">7-sinf</option>
+          <option value="8">8-sinf</option>
+          <option value="9">9-sinf</option>
+          <option value="10">10-sinf</option>
+          <option value="11">11-sinf</option>
+        </select>
+        <div class="err-msg">Iltimos, sinfni tanlang</div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span class="label">Ro'yxatdan o'tish →</span>
+        <span class="spin"></span>
+      </button>
+
+      <div class="privacy">Ma'lumotlaringiz faqat qabul jarayoni uchun ishlatiladi.</div>
+    </form>
+  </div>
+
+  <!-- SUCCESS CARD -->
+  <div class="card" id="successCard" style="display:none">
+    <div class="success" id="successBlock">
+      <div class="success-ic">✓</div>
+      <h2>Anketangiz qabul qilindi!</h2>
+      <p>Rahmat! Siz bilan <b>eng qisqa vaqtda</b> bog'lanamiz.</p>
+      <div class="summary" id="summary"></div>
+      <button class="again" onclick="resetForm()">Yangi anketa to'ldirish</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>© Avangard School · 2025</div>
+    <div class="footer-row">
+      <a href="https://instagram.com/avangard.school" target="_blank" rel="noopener">📷 Instagram</a>
+      <a href="tel:+998901234567">📞 +998 90 123 45 67</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────
+  // Vercel serverless endpoint (api/lead.js) — lidlar amoCRM ga yo'naltiriladi.
+  const API_ENDPOINT = "/api/lead";
+
+  // ── PHONE MASK ──────────────────────────────────────────────────────────
+  const phoneEl = document.getElementById('phone');
+  phoneEl.addEventListener('input', e => {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 9);
+    const parts = [];
+    if (v.length > 0) parts.push(v.slice(0, 2));
+    if (v.length > 2) parts.push(v.slice(2, 5));
+    if (v.length > 5) parts.push(v.slice(5, 7));
+    if (v.length > 7) parts.push(v.slice(7, 9));
+    e.target.value = parts.join(' ');
+  });
+  phoneEl.addEventListener('focus', e => {
+    if (!e.target.value) e.target.value = '';
+  });
+
+  // ── VALIDATION ──────────────────────────────────────────────────────────
+  function setErr(fieldId, on) {
+    const f = document.getElementById('f-' + fieldId);
+    const inp = document.getElementById(fieldId);
+    if (on) {
+      f.classList.add('show-err');
+      inp.classList.add('err');
+    } else {
+      f.classList.remove('show-err');
+      inp.classList.remove('err');
+    }
+  }
+
+  ['name', 'phone', 'address', 'grade'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => setErr(id, false));
+    el.addEventListener('change', () => setErr(id, false));
+  });
+
+  function validate() {
+    let ok = true;
+    const name = document.getElementById('name').value.trim();
+    const phoneDigits = phoneEl.value.replace(/\D/g, '');
+    const address = document.getElementById('address').value.trim();
+    const grade = document.getElementById('grade').value;
+
+    if (name.length < 2) { setErr('name', true); ok = false; }
+    if (phoneDigits.length !== 9) { setErr('phone', true); ok = false; }
+    if (address.length < 3) { setErr('address', true); ok = false; }
+    if (!grade) { setErr('grade', true); ok = false; }
+
+    if (!ok) {
+      const firstErr = document.querySelector('.field.show-err');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    return ok;
+  }
+
+  // ── SUBMIT ──────────────────────────────────────────────────────────────
+  document.getElementById('leadForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.classList.add('loading');
+
+    const name = document.getElementById('name').value.trim();
+    const phoneDigits = phoneEl.value.replace(/\D/g, '');
+    const phone = '+998' + phoneDigits;
+    const address = document.getElementById('address').value.trim();
+    const grade = document.getElementById('grade').value;
+    const gradeLabel = document.getElementById('grade').options[document.getElementById('grade').selectedIndex].text;
+
+    const payload = {
+      name,
+      phone,
+      address,
+      grade,
+      gradeLabel,
+      source: 'website',
+      ts: new Date().toISOString(),
+    };
+
+    // localStorage backup (CRM tushmasa ham yo'qolmaydi)
+    try {
+      const leads = JSON.parse(localStorage.getItem('avangard_qabul_leads') || '[]');
+      leads.push(payload);
+      localStorage.setItem('avangard_qabul_leads', JSON.stringify(leads));
+    } catch (_) {}
+
+    // amoCRM ga yuborish (Vercel serverless via /api/lead)
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) console.warn('Lead post failed:', res.status);
+    } catch (err) {
+      console.warn('Lead post error:', err);
+    }
+
+    // Show success
+    document.getElementById('summary').innerHTML = `
+      <div class="row"><span>Ism</span><span>${escapeHtml(name)}</span></div>
+      <div class="row"><span>Telefon</span><span>${escapeHtml(phone)}</span></div>
+      <div class="row"><span>Manzil</span><span>${escapeHtml(address)}</span></div>
+      <div class="row"><span>Sinf</span><span>${escapeHtml(gradeLabel)}</span></div>
+    `;
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+    document.getElementById('successBlock').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  });
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function resetForm() {
+    document.getElementById('leadForm').reset();
+    document.getElementById('formCard').style.display = 'block';
+    document.getElementById('successCard').style.display = 'none';
+    document.getElementById('successBlock').classList.remove('show');
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('show-err'));
+    document.querySelectorAll('.input, .select').forEach(i => i.classList.remove('err'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
