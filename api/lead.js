@@ -37,7 +37,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    const baseUrl = `https://${SUB}.amocrm.ru`;
+    // JWT'dan api_domain'ni o'qib olamiz (amoCRM data-center subdomain'i)
+    // Long-lived token misol: header.payload.signature — payload base64url
+    let apiDomain = `${SUB}.amocrm.ru`;
+    try {
+      const payload = JSON.parse(Buffer.from(TOKEN.split('.')[1], 'base64').toString());
+      if (payload.api_domain) apiDomain = payload.api_domain;
+      console.log('[amoCRM] JWT api_domain:', payload.api_domain, 'account_id:', payload.account_id);
+    } catch (e) {
+      console.warn('[amoCRM] JWT parse failed, falling back to subdomain:', e.message);
+    }
+    const baseUrl = `https://${apiDomain}`;
+    console.log('[amoCRM] Using baseUrl:', baseUrl);
 
     // 1) Contact yaratish (telefon + manzil)
     const contactBody = [{
